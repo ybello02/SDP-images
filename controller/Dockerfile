@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 RUN echo "Doing intial setup..."
 
-# RUN apt-get update -y
+RUN apt-get update -y
 RUN apt-get install -y curl git
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
