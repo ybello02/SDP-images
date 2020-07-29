@@ -4,8 +4,6 @@ RUN echo "Doing intial setup..."
 
 RUN apt-get update -y
 RUN apt-get install -y curl git
-RUN https://websiteforstudents.com/install-the-latest-node-js-and-nmp-packages-on-
-ubuntu-16-04-18-04-lts/
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 RUN apt-get install -y nodejs
 
