@@ -5,7 +5,7 @@ echo "Cloning SDPController project from Waverley..."
 git clone https://github.com/waverleylabs/SDPController.git
 yes | cp -rf config.js SDPController/config.js 
 cd SDPController
-sudo npm install
+npm install
 #login to the database
 echo "Starting Mysql service and setting up database..."
 service mysql start
