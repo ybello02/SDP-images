@@ -9,7 +9,7 @@ RUN apt-get install -y nodejs
 
 RUN echo "Cloning SDPController project from Waverley..."
 RUN git clone https://github.com/waverleylabs/SDPController.git
-RUN yes | cp -rf config.js SDPController/config.js 
+RUN yes | cp -rf controller/config.js SDPController/config.js 
 RUN cd SDPController
 RUN npm install
 
