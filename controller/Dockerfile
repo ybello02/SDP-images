@@ -1,5 +1,8 @@
 FROM ubuntu:16.04
 
+WORKDIR /controller
+COPY * /controller/
+
 RUN echo "Doing intial setup..."
 
 RUN apt-get update -y
@@ -62,8 +65,8 @@ RUN done
 
 EXPOSE 5000
 EXPOSE 22
-WORKDIR /controller
-COPY * /controller/
+# WORKDIR /controller
+#  COPY * /controller/
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 # RUN ./installDependencies.sh
 # RUN ./setupMySQL.sh
