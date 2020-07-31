@@ -20,7 +20,7 @@ RUN npm install
 
 RUN echo "Starting Mysql service and setting up database..."
 RUN apt-get install -y mysql-server
-# RUN service mysql start
+RUN service mysql start
 RUN mysql -u root -e "create database sdp;"
 RUN cd setup
 RUN mysql -u root sdp < sdp.sql
