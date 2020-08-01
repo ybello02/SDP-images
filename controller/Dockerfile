@@ -7,18 +7,12 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 RUN echo "Doing intial setup..."
 
-RUN apt-get update -y && apt-get install -y curl git
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get update -y && apt-get install -y curl git && curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
 
 RUN echo "Cloning SDPController project from Waverley..."
-RUN git clone https://github.com/waverleylabs/SDPController.git
-RUN yes | cp -rf config.js SDPController/config.js 
-WORKDIR SDPController
-RUN npm install
-
-RUN echo "Starting Mysql service and setting up database..."
-RUN apt-get install -y mysql-server && service mysql start && mysql -u root -e "create database sdp;" && WORKDIR setup && mysql -u root sdp < sdp.sql && \
+RUN git clone https://github.com/waverleylabs/SDPController.git && yes | cp -rf config.js SDPController/config.js  && WORKDIR SDPController && npm install && \
+    echo "Starting Mysql service and setting up database..." && \
+    apt-get install -y mysql-server && service mysql start && mysql -u root -e "create database sdp;" && WORKDIR setup && mysql -u root sdp < sdp.sql && \
     mysql sdp << EOF && \
     INSERT INTO sdpid(sdpid,valid,type,country,state,locality,org,org_unit,alt_name,email,serial) VALUES (1,1,'gateway','CA', 'ON', 'London', 'UWO', 'SE', 'Postdoc', 'abc@xyz.com', 'abc123'); && \
     INSERT INTO sdpid(sdpid,valid,type,country,state,locality,org,org_unit,alt_name,email,serial)VALUES (2,1,'controller','CA', 'ON', 'London', 'UWO', 'SE', 'Postdoc', 'abc@xyz.com', 'abc123'); && \
