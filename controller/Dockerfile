@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 WORKDIR /controller
 COPY * /controller/
@@ -7,22 +7,19 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 RUN echo "Doing intial setup..."
 
-RUN apt-get update -y
-RUN apt-get install -y curl git
+RUN apt-get update -y && apt-get install -y curl git
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 
 RUN echo "Cloning SDPController project from Waverley..."
 RUN git clone https://github.com/waverleylabs/SDPController.git
 RUN yes | cp -rf config.js SDPController/config.js 
-RUN cd SDPController
+WORKDIR SDPController
 RUN npm install
 
 RUN echo "Starting Mysql service and setting up database..."
-RUN apt-get install -y mysql-server
-RUN service mysql start
-RUN mysql -u root -e "create database sdp;"
-RUN cd setup
+RUN apt-get install -y mysql-server && service mysql start && mysql -u root -e "create database sdp;"
+WORKDIR setup
 RUN mysql -u root sdp < sdp.sql
 
 RUN mysql sdp << EOF
@@ -44,6 +41,7 @@ RUN INSERT INTO sdpid_service VALUES(3, 3, 1);
 RUN INSERT INTO sdpid_service VALUES(4, 3, 2);
 RUN EOF
 
+WORKDIR /controller
 RUN apt-get install -y openssl
 RUN country=CA
 RUN state=ON
@@ -67,12 +65,9 @@ RUN done
 
 EXPOSE 5000
 EXPOSE 22
-# WORKDIR /controller
-#  COPY * /controller/
-# RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-# RUN ./installDependencies.sh
-# RUN ./setupMySQL.sh
-# RUN ./Gencerts.sh
+
+WORKDIR /controller
+
 CMD ["/bin/bash", "-c","/controller/runController.sh"]
 
 
