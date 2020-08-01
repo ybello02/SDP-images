@@ -12,15 +12,9 @@ RUN apt-get update -y && apt-get install -y curl git openssl libssl-dev libjson0
 RUN echo "Install FWKNOP"
 RUN git clone https://github.com/waverleylabs/fwknop.git
 WORKDIR fwknop
-RUN libtoolize --force
-RUN aclocal
-RUN autoheader
-RUN automake --force-missing --add-missing
-RUN autoconf
-RUN ./configure -disable-client --prefix=/usr --sysconfdir=/etc
-RUN make
-RUN make install
-
+RUN libtoolize --force && aclocal && autoheader && automake --force-missing --add-missing && autoconf && \
+    ./configure -disable-client --prefix=/usr --sysconfdir=/etc && make && make install
+    
 WORKDIR /gateway
 
 RUN echo "Copying config files..."
