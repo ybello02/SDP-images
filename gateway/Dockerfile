@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 EXPOSE 4444
 WORKDIR /gateway
