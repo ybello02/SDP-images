@@ -10,14 +10,8 @@ RUN apt-get update -y && apt-get install -y texinfo libtool autoconf make telnet
 RUN echo "Setting up Waverley Labs fwknop client..."
 RUN git clone https://github.com/WaverleyLabs/fwknop.git
 WORKDIR fwknop
-RUN libtoolize --force
-RUN aclocal
-RUN autoheader
-RUN automake --force-missing --add-missing
-RUN autoconf
-RUN ./configure --disable-server --prefix=/usr
-RUN make
-RUN make install
+RUN libtoolize --force && aclocal && autoheader && automake --force-missing --add-missing && autoconf && \
+    ./configure --disable-server --prefix=/usr && make && make install
 
 WORKDIR /client
 
