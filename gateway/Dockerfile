@@ -1,6 +1,5 @@
 FROM ubuntu:14.04
 
-EXPOSE 4444
 WORKDIR /gateway
 COPY * /gateway/
 
@@ -21,6 +20,7 @@ RUN echo "Copying config files..."
 RUN yes | cp access.conf /etc/fwknop/ && yes | cp fwknopd.conf /etc/fwknop/ && yes | cp gate_sdp_ctrl_client.conf /etc/fwknop/ && \
     yes | cp gate.fwknoprc /etc/fwknop/
 
+EXPOSE 4444
 
 CMD ["/bin/bash","-c", " ./fwknopSetup.sh $SERVER_HOSTNAME"]
 
