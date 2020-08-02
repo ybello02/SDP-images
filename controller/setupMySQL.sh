@@ -1,20 +1,6 @@
 #!/bin/bash
 
-#login as a root
-echo "Cloning SDPController project from Waverley..."
-git clone https://github.com/waverleylabs/SDPController.git
-yes | cp -rf config.js SDPController/config.js 
-cd SDPController
-npm install
-#login to the database
-echo "Starting Mysql service and setting up database..."
-service mysql start
-mysql -u root -e "create database sdp;"
-
-#import the db to the controller
-cd setup
 mysql -u root sdp < sdp.sql
-
 
 #EDIT the following config to match your SDP setup
 #populate the tables
