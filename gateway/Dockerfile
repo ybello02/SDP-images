@@ -17,8 +17,8 @@ RUN libtoolize --force && aclocal && autoheader && automake --force-missing --ad
 WORKDIR /gateway
 
 RUN echo "Copying config files..."
-RUN yes | cp access.conf /etc/fwknop/ && yes | cp fwknopd.conf /etc/fwknop/ && yes | cp gate_sdp_ctrl_client.conf /etc/fwknop/ && \
-    yes | cp gate.fwknoprc /etc/fwknop/
+RUN yes | cp conf/access.conf /etc/fwknop/ && yes | cp conf/fwknopd.conf /etc/fwknop/ && yes | cp conf/gate_sdp_ctrl_client.conf /etc/fwknop/ && \
+    yes | cp conf/gate.fwknoprc /etc/fwknop/
 
 EXPOSE 4444
 
