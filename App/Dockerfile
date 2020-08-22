@@ -4,7 +4,7 @@ ARG SSH_PASS=eceUser
 
 RUN apt-get update -y && apt-get install -y openssh-server
 
-RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser
+RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser && usermod -aG sudo sshuser
 
 EXPOSE 22
 
