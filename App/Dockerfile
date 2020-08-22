@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 ARG SSH_PASS=eceUser 
 
@@ -8,4 +8,4 @@ RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser
 
 EXPOSE 22
 
-CMD service ssh start && /bin/bash
+CMD systemctl start ssh && /bin/bash
