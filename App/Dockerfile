@@ -8,4 +8,4 @@ RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser
 
 EXPOSE 22
 
-CMD systemctl start ssh && /bin/bash
+CMD service ssh start && /bin/bash
