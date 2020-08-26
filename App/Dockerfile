@@ -5,7 +5,7 @@ COPY * /App/
 
 ARG SSH_PASS=eceUser 
 
-RUN apt-get update -y && apt-get install -y openssh-server 
+RUN apt-get update -y && apt-get install -y openssh-server sudo net-tools
 
 # RUN mkdir /var/run/sshd
 
