@@ -14,5 +14,5 @@ RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser && usermod
 EXPOSE 22
 
 # CMD service ssh start && /bin/bash
-CMD ["/bin/bash","-c", "./fwknopClient.sh"]
+CMD ["/bin/bash","-c", "./start.sh"]
 
