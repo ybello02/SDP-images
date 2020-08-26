@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 
 WORKDIR /App
+COPY * /App/
+
 ARG SSH_PASS=eceUser 
 
 RUN apt-get update -y && apt-get install -y openssh-server 
