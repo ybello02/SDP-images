@@ -12,7 +12,7 @@ RUN apt-get update -y && apt-get install -y openssh-server
 RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser && usermod -aG sudo sshuser
 
 EXPOSE 22
-RUN chmod -R 755 start.sh
+RUN chmod -R 755 /App/start.sh
 # CMD service ssh start && /bin/bash
 CMD ["/bin/bash","-c", "./start.sh"]
 
