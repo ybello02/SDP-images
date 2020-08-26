@@ -8,4 +8,5 @@ RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser && usermod
 
 EXPOSE 22
 
-CMD service ssh start && /bin/bash
+# CMD service ssh start && /bin/bash
+CMD ["/bin/bash", "service ssh start"]
