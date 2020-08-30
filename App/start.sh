@@ -4,4 +4,4 @@
 #while true; do
 #   sleep 100
 #done
-service start ssh
+service ssh start
