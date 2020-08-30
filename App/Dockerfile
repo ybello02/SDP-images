@@ -12,7 +12,8 @@ RUN mkdir /var/run/sshd && chmod 0755 /var/run/sshd
 RUN useradd -m -s /bin/bash -p $(openssl passwd -1 $SSH_PASS) sshuser && usermod -aG sudo sshuser
 # RUN chmod -R 0755 /etc/ssh
 EXPOSE 22
-RUN chmod -R 755 /App/start.sh
+RUN chmod -R 755 /App/start.sh && /App/start.sh
 # CMD chmod -R 0755 /etc/ssh && service ssh start && /bin/bash
-CMD ["/bin/bash","-c", "./start.sh"]
+CMD ["/usr/sbin/sshd","-D"]
+# CMD ["/bin/bash","-c", "./start.sh"]
 
