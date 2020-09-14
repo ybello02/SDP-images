@@ -24,6 +24,9 @@ RUN apt-get install -y openssl && ./Gencert.sh
 EXPOSE 5000
 EXPOSE 22
 
-CMD ["/bin/bash", "-c","/controller/runController.sh"]
+#CMD ["/bin/bash", "-c","/controller/runController.sh"]
+
+
+CMD ["/bin/bash", "-c", "sleep infinity"]
 
 
