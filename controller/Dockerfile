@@ -13,7 +13,7 @@ RUN echo "Cloning SDPController project from Waverley..."
 RUN git clone https://github.com/waverleylabs/SDPController.git && yes | cp -rf config.js SDPController/config.js  && cd SDPController && npm install
 
 # COPY setupMySQL.sh SDPController/setup/
-COPY /controller/setupMySQL.sh SDPController/setup/
+COPY setupMySQL.sh SDPController/setup/
 
 RUN echo "Starting Mysql service and setting up database..." 
 RUN apt-get install -y mysql-server && service mysql start && mysql -u root -e "create database sdp;" && cd SDPController/setup && mysql -u root sdp < sdp.sql && \
